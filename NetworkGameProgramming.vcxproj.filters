@@ -20,7 +20,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="homework5_server.cpp">
+    <ClCompile Include="ThreadTCPServer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

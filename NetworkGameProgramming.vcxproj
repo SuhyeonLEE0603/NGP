@@ -130,7 +130,7 @@
     <ClInclude Include="Common.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="homework5_server.cpp" />
+    <ClCompile Include="ThreadTCPServer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
