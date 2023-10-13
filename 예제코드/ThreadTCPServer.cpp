@@ -21,6 +21,7 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 	while (1) {
 		// 데이터 받기
 		retval = recv(client_sock, buf, BUFSIZE, 0);
+		printf("retval = %d\n", retval);
 		if (retval == SOCKET_ERROR) {
 			err_display("recv()");
 			break;
