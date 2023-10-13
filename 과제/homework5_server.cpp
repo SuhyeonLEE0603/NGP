@@ -1,4 +1,4 @@
-#include "Common.h"
+#include "../Common.h"
 
 #define SERVERPORT 9000
 #define BUFSIZE    1024
@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 	char fileName[256];			// 파일 이름
 	memset(fileName, 0, sizeof(fileName));
 	int filesize;				// 파일 크기
-	int size{256};
+	int size{ 256 };
 	///////////////////////////////////////////////////
 
 	while (1) {
@@ -59,12 +59,13 @@ int main(int argc, char* argv[])
 
 		// 클라이언트와 데이터 통신
 		// 데이터 받기(파일명)
-		retval = recv(client_sock, fileName, 13, 0);
+		retval = recv(client_sock, fileName, sizeof(fileName), 0);
 		if (retval == SOCKET_ERROR) {
 			err_display("recv() 파일명");
 			break;
 		}
 
+		fileName[retval] = 0;
 		printf("받을 파일 이름 -> %s\n", fileName);
 
 		// 파일 크기 받기
@@ -89,19 +90,19 @@ int main(int argc, char* argv[])
 			if (retval == SOCKET_ERROR) {
 				err_display("recv() 파일 데이터");
 				break;
-				}
+			}
 			fwrite(buf, sizeof(char), retval, fp);
 			if (ferror(fp)) {
 				printf("파일 입출력 오류2");
 				break;
-				}
-					
+			}
+
 			numtotal += retval;
 			printf("전송률(수신률) : %0.2f %%\n", (float)numtotal / filesize * 100);
 
-			}
+		}
 		fclose(fp);
-			
+
 		printf("[TCP 서버] 클라이언트 전송성공 : IP 주소=%s, 포트 번호=%d\n",
 			addr, ntohs(clientaddr.sin_port));
 

@@ -3,7 +3,9 @@
 
 DWORD WINAPI MyThread(LPVOID arg)
 {
-	while (1);
+	while (1) {
+	}
+	
 	return 0;
 }
 
@@ -21,9 +23,12 @@ int main()
 	for (int i = 0; i < (int)si.dwNumberOfProcessors; i++) {
 		// 스레드를 생성한다.
 		HANDLE hThread = CreateThread(NULL, 0, MyThread, NULL, 0, NULL);
+		printf("스레드 생성 : %d\n", i + 1);
+
 		// 우선순위를 높게 설정한다.
 		SetThreadPriority(hThread, THREAD_PRIORITY_ABOVE_NORMAL);
 		CloseHandle(hThread);
+		printf("스레드 삭제 : %d\n", i + 1);
 	}
 
 	// 우선순위를 낮게 설정한다.
