@@ -111,5 +111,5 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-// cd C:\NetworkGameProgramming_Client\x64\Release
+// cd C:\NetworkGameProgramming\x64\Release
 // NetworkGameProgramming_Client 127.0.0.1 testvideo.mp4
