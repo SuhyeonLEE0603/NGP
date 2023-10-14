@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{e31d60c3-af26-4104-9f02-5beb64f72e1a}</ProjectGuid>
-    <RootNamespace>NetworkGameProgramming</RootNamespace>
+    <ProjectGuid>{1dded55e-7af2-4370-8ab6-e41d17b2e7e3}</ProjectGuid>
+    <RootNamespace>NetworkGameProgrammingClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -130,7 +130,7 @@
     <ClInclude Include="Common.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="과제\homework5_server.cpp" />
+    <ClCompile Include="과제(Client)\homework5_client.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
