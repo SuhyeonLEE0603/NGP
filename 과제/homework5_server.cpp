@@ -28,7 +28,8 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 
 	// 클라이언트와 데이터 통신
 
-	// 데이터 받기(파일명 길이)
+	// 데이터 받기(파일명 길이) - 파일명 길이를 안받고 바로 파일명 받는 것은 실패
+	// -> 스레드 실행이 우선순위가 늦어 이미 수신 버퍼에 데이터들이 쌓여 있음
 	retval = recv(client_sock, (char*)&fileNameLen, sizeof(fileNameLen), 0);
 	if (retval == SOCKET_ERROR) {
 		err_display("recv() 파일명 길이");
