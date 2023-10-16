@@ -11,13 +11,12 @@ COORD cursorPos;
 // 클라이언트와 데이터 통신
 DWORD WINAPI ProcessClient(LPVOID arg)
 {
-	
 	++ThreadNum;
 	int num = ThreadNum;
 
 	// 커서를 (X, Y) 좌표로 이동
 	cursorPos.X = 0; // X 좌표
-	cursorPos.Y = 5 * (num - 1) + 1; // Y 좌표
+	cursorPos.Y = 6 * (num - 1); // Y 좌표
 
 	SetConsoleCursorPosition(hConsole, cursorPos);
 
@@ -40,6 +39,9 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 	getpeername(client_sock, (struct sockaddr*)&clientaddr, &addrlen);
 	inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
 
+	printf("[TCP 서버] 클라이언트 접속: IP 주소=%s, 포트 번호=%d\n",
+		addr, ntohs(clientaddr.sin_port));
+
 	// 클라이언트와 데이터 통신
 	// 데이터 받기(파일명 길이)
 	retval = recv(client_sock, (char*)&fileNameLen, sizeof(fileNameLen), 0);
@@ -54,7 +56,9 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 		err_display("recv() 파일명");
 		return 1;
 	}
+	cursorPos.Y = 6 * (num - 1) + 1; // Y 좌표
 
+	SetConsoleCursorPosition(hConsole, cursorPos);
 	printf("받을 파일 이름 -> %s\n", fileName);
 
 	// 파일 크기 받기
@@ -86,7 +90,7 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 		}
 
 		numtotal += retval;
-		cursorPos.Y = 5 * (num - 1) + 3; // Y 좌표
+		cursorPos.Y = 6 * (num - 1) + 2; // Y 좌표
 
 		SetConsoleCursorPosition(hConsole, cursorPos);
 		printf("클라이언트(IP 주소=%s, 포트 번호=%d) 전송률(수신률) = %0.2f %% \r",
@@ -95,7 +99,7 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 	}
 
 	fclose(fp);
-	cursorPos.Y = 5 * (num - 1) + 4; // Y 좌표
+	cursorPos.Y = 6 * (num - 1) + 2; // Y 좌표
 
 	SetConsoleCursorPosition(hConsole, cursorPos);
 	if (((float)numtotal / filesize * 100) == 100.0) {
@@ -118,9 +122,6 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 int main(int argc, char* argv[])
 {
 	int retval;
-
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD cursorPos;
 
 	// 윈속 초기화
 	WSADATA wsa;
@@ -158,13 +159,6 @@ int main(int argc, char* argv[])
 			err_display("accept()");
 			break;
 		}
-
-		// 접속한 클라이언트 정보 출력
-		char addr[INET_ADDRSTRLEN];
-		inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
-
-		printf("[TCP 서버] 클라이언트 접속: IP 주소=%s, 포트 번호=%d\n",
-			addr, ntohs(clientaddr.sin_port));
 
 		// 스레드 생성
 		hThread = CreateThread(NULL, 0, ProcessClient,
