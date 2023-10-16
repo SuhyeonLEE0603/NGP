@@ -1,7 +1,7 @@
 #include "../../Common.h"
 
 #define SERVERPORT 9000
-#define BUFSIZE    20000
+#define BUFSIZE    1024
 
 int main(int argc, char* argv[])
 {
@@ -24,8 +24,8 @@ int main(int argc, char* argv[])
 		strcpy(fileName, argv[2]);
 	}
 	else {
-		printf("파일 이름을 입력하세요");
-		return 1;
+		strcpy(SERVERIP, "127.0.0.1");
+		strcpy(fileName, "testvideo.mp4");
 	}
 
 	// 윈속 초기화
@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
 	// 파일 열기
 	FILE* fp = fopen(fileName, "rb");
 	if (fp == NULL) {
-		printf("파일 입출력 오류1");
+		printf("파일 입출력 오류");
 		return 1;
 	}
 	// 서버와 데이터 통신
@@ -96,6 +96,7 @@ int main(int argc, char* argv[])
 			}
 
 			numtotal += retval;
+			Sleep(10);
 		}
 	}
 	printf("[TCP 클라이언트] 파일 전송 완료 %d바이트를 보냈습니다.\n",

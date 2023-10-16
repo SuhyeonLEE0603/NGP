@@ -1,11 +1,26 @@
 #include "../../Common.h"
 
 #define SERVERPORT 9000
-#define BUFSIZE    20000
+#define BUFSIZE    1024
+
+int ThreadNum{};
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD cursorPos;
 
 // 클라이언트와 데이터 통신
 DWORD WINAPI ProcessClient(LPVOID arg)
 {
+	
+	++ThreadNum;
+	int num = ThreadNum;
+
+	// 커서를 (X, Y) 좌표로 이동
+	cursorPos.X = 0; // X 좌표
+	cursorPos.Y = 5 * (num - 1) + 1; // Y 좌표
+
+	SetConsoleCursorPosition(hConsole, cursorPos);
+
 	// 데이터 통신에 사용할 변수
 	///////////////////////////////////////////////////
 	int retval;
@@ -18,7 +33,6 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 	char fileName[256];										// 파일명
 	int filesize{};											// 파일 크기
 	int numtotal{};											// 수신한 데이터 바이트 수
-	int reception_rate{};									// 수신률
 	///////////////////////////////////////////////////
 
 	// 클라이언트 정보 얻기
@@ -27,9 +41,7 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 	inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
 
 	// 클라이언트와 데이터 통신
-
-	// 데이터 받기(파일명 길이) - 파일명 길이를 안받고 바로 파일명 받는 것은 실패
-	// -> 스레드 실행이 우선순위가 늦어 이미 수신 버퍼에 데이터들이 쌓여 있음
+	// 데이터 받기(파일명 길이)
 	retval = recv(client_sock, (char*)&fileNameLen, sizeof(fileNameLen), 0);
 	if (retval == SOCKET_ERROR) {
 		err_display("recv() 파일명 길이");
@@ -42,7 +54,7 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 		err_display("recv() 파일명");
 		return 1;
 	}
-		
+
 	printf("받을 파일 이름 -> %s\n", fileName);
 
 	// 파일 크기 받기
@@ -74,25 +86,41 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 		}
 
 		numtotal += retval;
-		reception_rate = (int)((float)numtotal / filesize * 100);
-		if (reception_rate % 5 == 0) {
-			printf("전송률(수신률) : %d %%\n", reception_rate);
-		}
-	}
-	fclose(fp);
+		cursorPos.Y = 5 * (num - 1) + 3; // Y 좌표
 
-	printf("[TCP 서버] 클라이언트 전송성공 : IP 주소=%s, 포트 번호=%d\n",
-		addr, ntohs(clientaddr.sin_port));
+		SetConsoleCursorPosition(hConsole, cursorPos);
+		printf("클라이언트(IP 주소=%s, 포트 번호=%d) 전송률(수신률) = %0.2f %% \r",
+			addr, ntohs(clientaddr.sin_port), (float)numtotal / filesize * 100);
+
+	}
+
+	fclose(fp);
+	cursorPos.Y = 5 * (num - 1) + 4; // Y 좌표
+
+	SetConsoleCursorPosition(hConsole, cursorPos);
+	if (((float)numtotal / filesize * 100) == 100.0) {
+		printf("\n[TCP 서버] 클라이언트 전송성공 : IP 주소=%s, 포트 번호=%d\n",
+			addr, ntohs(clientaddr.sin_port));
+	}
+	else {
+		printf("[TCP 서버] 클라이언트 전송실패 : IP 주소=%s, 포트 번호=%d\n",
+			addr, ntohs(clientaddr.sin_port));
+	}
 	
 	// 소켓 닫기
 	closesocket(client_sock);
+
 	printf("[TCP 서버] 클라이언트 종료: IP 주소=%s, 포트 번호=%d\n",
 		addr, ntohs(clientaddr.sin_port));
+
 }
 
 int main(int argc, char* argv[])
 {
 	int retval;
+
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD cursorPos;
 
 	// 윈속 초기화
 	WSADATA wsa;
@@ -134,9 +162,10 @@ int main(int argc, char* argv[])
 		// 접속한 클라이언트 정보 출력
 		char addr[INET_ADDRSTRLEN];
 		inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
-		printf("\n[TCP 서버] 클라이언트 접속: IP 주소=%s, 포트 번호=%d\n",
+
+		printf("[TCP 서버] 클라이언트 접속: IP 주소=%s, 포트 번호=%d\n",
 			addr, ntohs(clientaddr.sin_port));
-		
+
 		// 스레드 생성
 		hThread = CreateThread(NULL, 0, ProcessClient,
 			(LPVOID)client_sock, 0, NULL);
