@@ -5,7 +5,9 @@
 
 int ThreadNum{};
 
+// 표준 출력 핸들을 얻음
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+// 현재 커서위치를 저장하기 위한 변수
 COORD cursorPos;
 
 // 클라이언트와 데이터 통신
