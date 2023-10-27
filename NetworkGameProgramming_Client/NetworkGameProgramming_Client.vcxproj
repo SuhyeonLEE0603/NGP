@@ -130,7 +130,7 @@
     <ClInclude Include="Common.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="과제(Client)\homework5_client.cpp" />
+    <ClCompile Include="예제코드(Client)\BroadcastReceiver.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="예제코드(Server)\CriticalSections.cpp">
+    <ClCompile Include="예제코드(Server)\BroadcastSender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -165,7 +165,7 @@ int main(int argc, char* argv[])
 		// 스레드 생성
 		hThread = CreateThread(NULL, 0, ProcessClient,
 			(LPVOID)client_sock, 0, NULL);
-		SetThreadPriority(hThread, THREAD_PRIORITY_ABOVE_NORMAL);
+		
 		if (hThread == NULL) { 
 			closesocket(client_sock); 
 		}
