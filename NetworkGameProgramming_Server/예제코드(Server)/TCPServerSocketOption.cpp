@@ -1,4 +1,4 @@
-#include "../../Common.h"
+#include "..\..\Common.h"
 
 #define SERVERPORT 9000
 #define BUFSIZE    512
@@ -15,6 +15,12 @@ int main(int argc, char *argv[])
 	// 소켓 생성
 	SOCKET listen_sock = socket(AF_INET, SOCK_STREAM, 0);
 	if (listen_sock == INVALID_SOCKET) err_quit("socket()");
+
+	// SO_REUSEADDR 소켓 옵션 설정
+	DWORD optval = 1;
+	retval = setsockopt(listen_sock, SOL_SOCKET, SO_REUSEADDR,
+		(const char *)&optval, sizeof(optval));
+	if (retval == SOCKET_ERROR) err_quit("setsockopt()");
 
 	// bind()
 	struct sockaddr_in serveraddr;
@@ -33,8 +39,7 @@ int main(int argc, char *argv[])
 	SOCKET client_sock;
 	struct sockaddr_in clientaddr;
 	int addrlen;
-	int len; // 고정 길이 데이터
-	char buf[BUFSIZE + 1]; // 가변 길이 데이터
+	char buf[BUFSIZE + 1];
 
 	while (1) {
 		// accept()
@@ -53,17 +58,8 @@ int main(int argc, char *argv[])
 
 		// 클라이언트와 데이터 통신
 		while (1) {
-			// 데이터 받기(고정 길이)
-			retval = recv(client_sock, (char *)&len, sizeof(int), MSG_WAITALL);
-			if (retval == SOCKET_ERROR) {
-				err_display("recv()");
-				break;
-			}
-			else if (retval == 0)
-				break;
-
-			// 데이터 받기(가변 길이)
-			retval = recv(client_sock, buf, len, MSG_WAITALL);
+			// 데이터 받기
+			retval = recv(client_sock, buf, BUFSIZE, 0);
 			if (retval == SOCKET_ERROR) {
 				err_display("recv()");
 				break;
@@ -74,6 +70,13 @@ int main(int argc, char *argv[])
 			// 받은 데이터 출력
 			buf[retval] = '\0';
 			printf("[TCP/%s:%d] %s\n", addr, ntohs(clientaddr.sin_port), buf);
+
+			// 데이터 보내기
+			retval = send(client_sock, buf, retval, 0);
+			if (retval == SOCKET_ERROR) {
+				err_display("send()");
+				break;
+			}
 		}
 
 		// 소켓 닫기
