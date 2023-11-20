@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\NGP_WindowProject\예제코드\GUITCPServer.cpp">
+    <ClCompile Include="예제코드(Server)\GUITCPServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

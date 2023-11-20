@@ -15,12 +15,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="예제코드(Client)\resource.h">
+    <ClInclude Include="예제코드(Client)\GUITCPClient_resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="예제코드(Client)\Resource File\GUITCPClient.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="예제코드(Client)\GUITCPClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="예제코드(Client)\DlgApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="예제코드(Client)\WinApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

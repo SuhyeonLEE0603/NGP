@@ -1,3 +1,6 @@
+// 윈도우 프로그래밍 : 프로젝트 속성 -> 링커 -> 시스템 -> 하위 시스템 -> 창으로 변경
+// Window Desktop 마법사 : 프로젝트 속성 -> 링커 -> 시스템 -> 하위 시스템 -> 콘솔로 변경
+
 #define _CRT_SECURE_NO_WARNINGS // 구형 C 함수 사용 시 경고 끄기
 #include <windows.h>
 #include <tchar.h>

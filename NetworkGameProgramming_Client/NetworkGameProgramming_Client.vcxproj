@@ -18,6 +18,17 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="예제코드(Client)\GUITCPClient_resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="예제코드(Client)\Resource File\GUITCPClient.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="예제코드(Client)\DlgApp.cpp" />
+    <ClCompile Include="예제코드(Client)\GUITCPClient.cpp" />
+    <ClCompile Include="예제코드(Client)\WinApp.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -120,18 +131,12 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="예제코드(Client)\resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="예제코드(Client)\GUITCPClient.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
