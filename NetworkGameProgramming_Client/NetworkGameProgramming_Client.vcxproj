@@ -127,7 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Common.h" />
+    <ClInclude Include="예제코드(Client)\resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="예제코드(Client)\GUITCPClient.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
