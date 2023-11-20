@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="예제코드\GUITCPServer.cpp" />
+    <ClInclude Include="예제코드\resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\NetworkGameProgramming_Client\예제코드(Client)\GUITCPClient.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

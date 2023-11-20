@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkGameProgramming_Clie
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkGameProgramming_Server", "NetworkGameProgramming_Server\NetworkGameProgramming_Server.vcxproj", "{98C5DA0E-8AA7-480B-AAFA-179D4F6AEC7F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NGP_WindowProject.vcxproj", "NGP_WindowProject\NGP_WindowProject.vcxproj.vcxproj", "{908D02A7-5823-46B0-B8E2-139E9C94FC02}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NGP_WindowProject", "NGP_WindowProject\NGP_WindowProject.vcxproj", "{908D02A7-5823-46B0-B8E2-139E9C94FC02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
