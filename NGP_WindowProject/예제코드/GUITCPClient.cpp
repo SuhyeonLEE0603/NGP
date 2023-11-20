@@ -1,5 +1,5 @@
 #include "..\..\Common.h"
-#include "resource.h"
+#include "GUITCPClient_resource.h"
 
 #define SERVERIP   "127.0.0.1"
 #define SERVERPORT 9000

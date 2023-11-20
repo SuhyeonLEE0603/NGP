@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <tchar.h>
 #include <stdio.h>
-#include "resource.h"
+#include "DlgApp_resource.h"
 
 #define BUFSIZE 25
 
