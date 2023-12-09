@@ -22,12 +22,7 @@
     <ClInclude Include="예제코드(Client)\GUITCPClient_resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="예제코드(Client)\Resource File\GUITCPClient.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="예제코드(Client)\DlgApp.cpp" />
-    <ClCompile Include="예제코드(Client)\GUITCPClient.cpp" />
-    <ClCompile Include="예제코드(Client)\WinApp.cpp" />
+    <ClCompile Include="과제(Client)\homework6_client.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -129,6 +124,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -15,8 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="예제코드(Server)\GUITCPServer.cpp">
+    <ClCompile Include="과제(Server)\homework5_server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="예제코드(Server)\ThreadTCPServer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

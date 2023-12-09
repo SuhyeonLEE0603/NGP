@@ -3,13 +3,19 @@
 
 #include <winsock2.h> // 윈속2 메인 헤더
 #include <ws2tcpip.h> // 윈속2 확장 헤더
+#include <windows.h>
+#include <commctrl.h>
+#include <shlwapi.h>
 
 #include <tchar.h> // _T(), ...
 #include <stdio.h> // printf(), ...
 #include <stdlib.h> // exit(), ...
 #include <string.h> // strncpy(), ...
+#include <string>
 
 #pragma comment(lib, "ws2_32") // ws2_32.lib 링크
+#pragma comment(lib, "comctl32.lib")  // commctrl 라이브러리 링크
+#pragma comment(lib, "shlwapi.lib")  // shlwapi 라이브러리 링크
 
 // 소켓 함수 오류 출력 후 종료
 void err_quit(const char *msg)
